@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        p{
+            font-size: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        input{
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Thêm thiết bị</p>
+    <input type="text" id="add">
+    <button onclick="addProduct()">Add</button>
+    <p>Danh sách các thiết bị</p>
+    <table id="displayArea" border="1">
+
+    </table>
+    <script>
+        let listProduct = ['Iphone 12', 'Iphone 12 Pro', 'Iphone 12 Pro Max', 'Iphone 12 Mini', 'Nokia 3508', 'SamSung A37'];
+        displayAll();
+        function displayAll() {
+            let str = '<tr?\n' +
+                '<td>Tên thiết bị</td>\n' +
+                '<td></td>\n' +
+                '<td>' + listProduct.length +""+ ' Thiết bị</td>\n' +
+                '</tr>';
+            for (let i = 0; i < listProduct.length; i++) {
+                str += '<tr>\n' +
+                    '<td>' + listProduct[i] + '</td>\n' +
+                    '<td><button id="edit" onclick="editProduct(' + i + ')">Edit</button></td>\n' +
+                    '<td><button id="detele" onclick="deleteProduct(' + i + ')">Delete</button></td>\n' +
+                    '</tr>';
+            }
+            document.getElementById('displayArea').innerHTML = str;
+        }
+
+        function addProduct() {
+            let productName = document.getElementById('add').value;
+            document.getElementById('add').value = '';
+            listProduct.push(productName);
+            console.log(listProduct);
+            displayAll();
+        }
+        function editProduct(index) {
+            let newName = prompt('Enter new name');
+            listProduct[index] = newName;
+            displayAll();
+        }
+        function deleteProduct(index) {
+            listProduct.splice(index, 1);
+            displayAll();
+        }
+   
+    </script>
+</body>
+
+</html>
